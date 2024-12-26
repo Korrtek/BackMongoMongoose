@@ -15,9 +15,11 @@ import { postCreateValidation } from './validation.js';
 import path from 'path';
 console.log(UserModel);
 
+// 'mongodb+srv://Korrtek:040112qwaszx@cluster0.lnk6n.mongodb.net/blog?'
+
 // коннект к базе через мангус
 mongoose
-  .connect('mongodb+srv://Korrtek:040112qwaszx@cluster0.lnk6n.mongodb.net/blog?')
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -70,13 +72,15 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
     url: '/uploads/' + req.file.originalname,
   });
 }),
-  app.listen(3333, (err) => {
+  app.listen(process.env.PORT || 4444, (err) => {
     if (err) {
       return console.log(err);
     }
 
     console.log('Serv ok');
   });
+
+// порт был 3333
 
 // app.post('/upload', checkAuth, upload.single('image'), (req, res) =>{
 //   res.json({
