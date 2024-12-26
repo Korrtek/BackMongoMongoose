@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs'; // Изменено на bcryptjs
 import UserModel from '../model/user.js';
 import { validationResult } from 'express-validator';
 import checkAuth from '../utils/checkAuth.js';
+
 export const register = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -11,8 +12,8 @@ export const register = async (req, res) => {
     }
 
     const password = req.body.password.toString();
-    const salt = await bcrypt.genSalt(10); // Generate salt first
-    const passwordHash = await bcrypt.hash(password, salt); // Then hash the password
+    const salt = await bcrypt.genSalt(10); // Генерация соли
+    const passwordHash = await bcrypt.hash(password, salt); // Хеширование пароля
 
     const doc = new UserModel({
       email: req.body.email,
@@ -52,7 +53,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: 'Пользователь не найден' });
     }
 
-    const isValidPass = await bcrypt.compare(req.body.password, user._doc.passwordHash);
+    const isValidPass = await bcrypt.compare(req.body.password, user._doc.passwordHash); // Сравнение паролей
 
     if (!isValidPass) {
       return res.status(401).json({ message: 'Неверный пароль' });
