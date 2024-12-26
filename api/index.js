@@ -15,14 +15,9 @@ import { postCreateValidation } from '../validation.js';
 import path from 'path';
 console.log(UserModel);
 
-// 'mongodb+srv://Korrtek:040112qwaszx@cluster0.lnk6n.mongodb.net/blog?'
-
 // коннект к базе через мангус
 mongoose
-  .connect(
-    process.env.MONGODB_URI ||
-      'mongodb+srv://Korrtek:040112qwaszx@cluster0.lnk6n.mongodb.net/blog?',
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
   })
