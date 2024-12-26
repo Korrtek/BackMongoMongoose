@@ -72,7 +72,7 @@ app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
     url: '/uploads/' + req.file.originalname,
   });
 }),
-  app.listen(process.env.PORT || 4444, (err) => {
+  app.listen(process.env.PORT || 3333, (err) => {
     if (err) {
       return console.log(err);
     }
