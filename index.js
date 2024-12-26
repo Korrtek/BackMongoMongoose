@@ -1,17 +1,17 @@
 import express from 'express';
 import multer from 'multer';
 import mongoose from 'mongoose';
-import { registerValidation } from '../validation.js';
+import { registerValidation } from './validation.js';
 import cors from 'cors';
 
-import UserModel from '../model/user.js';
-import checkAuth from '../utils/checkAuth.js';
+import UserModel from './model/user.js';
+import checkAuth from './utils/checkAuth.js';
 
-import * as UserController from '../controllers/UserController.js';
-import * as Comment from '../controllers/CommentController.js';
-import * as MangaData from '../controllers/MangaDataController.js';
-import * as Bookmarks from '../controllers/BookmarksController.js';
-import { postCreateValidation } from '../validation.js';
+import * as UserController from './controllers/UserController.js';
+import * as Comment from './controllers/CommentController.js';
+import * as MangaData from './controllers/MangaDataController.js';
+import * as Bookmarks from './controllers/BookmarksController.js';
+import { postCreateValidation } from './validation.js';
 import path from 'path';
 console.log(UserModel);
 
