@@ -19,7 +19,10 @@ console.log(UserModel);
 
 // коннект к базе через мангус
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(
+    process.env.MONGODB_URI ||
+      'mongodb+srv://Korrtek:040112qwaszx@cluster0.lnk6n.mongodb.net/blog?',
+  )
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -29,16 +32,16 @@ mongoose
 
 const app = express();
 
-// const storage = multer.diskStorage({
-//   destination: (_, __, cb) => {
-//     cb(null, 'uploads');
-//   },
-//   filename: (_, file, cb) => {
-//     cb(null, file.originalname);
-//   },
-// });
+const storage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (_, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
 
-// const upload = multer({ storage });
+const upload = multer({ storage });
 
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
